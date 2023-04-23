@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fav_location/providers/users_location.dart';
 import 'package:fav_location/widgets/image_inout.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +17,15 @@ class AddLocation extends ConsumerStatefulWidget {
 
 class _AddLocationState extends ConsumerState<AddLocation> {
   final _titleController = TextEditingController();
+  File? _selectedImage;
   void _saveLocation() {
     final enterText = _titleController.text;
-    if (enterText.isEmpty) {
+    if (enterText.isEmpty || _selectedImage == null) {
       return;
     }
-    ref.read(userLocationProvider.notifier).addPlace(enterText);
+    ref
+        .read(userLocationProvider.notifier)
+        .addPlace(enterText, _selectedImage!);
     Navigator.of(context).pop();
   }
 
@@ -41,7 +46,11 @@ class _AddLocationState extends ConsumerState<AddLocation> {
                     color: Theme.of(context).colorScheme.onBackground),
               ),
               Gap(16),
-              ImageInput(),
+              ImageInput(
+                onPickTime: (image) {
+                  _selectedImage = image;
+                },
+              ),
               Gap(16),
               ElevatedButton.icon(
                 onPressed: _saveLocation,

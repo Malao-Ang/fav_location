@@ -24,8 +24,11 @@ class Locations extends ConsumerWidget {
               icon: Icon(Icons.add))
         ],
       ),
-      body: LocationList(
-        locations: userLocation,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: LocationList(
+          locations: userLocation,
+        ),
       ),
     );
   }
