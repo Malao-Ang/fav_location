@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fav_location/providers/users_location.dart';
 import 'package:fav_location/widgets/image_inout.dart';
+import 'package:fav_location/widgets/location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -51,6 +52,8 @@ class _AddLocationState extends ConsumerState<AddLocation> {
                   _selectedImage = image;
                 },
               ),
+              Gap(16),
+              LocationInput(),
               Gap(16),
               ElevatedButton.icon(
                 onPressed: _saveLocation,

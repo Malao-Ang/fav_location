@@ -13,13 +13,21 @@ class LocationDetail extends StatelessWidget {
         title: Text(location.title),
       ),
       body: Center(
-        child: Text(
-          location.title,
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(color: Theme.of(context).colorScheme.onBackground),
-        ),
+        child: Stack(children: [
+          Image.file(
+            location.image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Text(
+            location.title,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: Theme.of(context).colorScheme.onBackground),
+          ),
+        ]),
       ),
     );
   }
