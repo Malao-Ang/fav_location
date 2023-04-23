@@ -40,6 +40,7 @@ class _AddLocationState extends ConsumerState<AddLocation> {
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.onBackground),
               ),
+              Gap(16),
               ImageInput(),
               Gap(16),
               ElevatedButton.icon(

@@ -39,6 +39,7 @@ dependencies:
   uuid: ^3.0.7
   gap: ^3.0.0
   flutter_riverpod: ^2.3.2
+  image_picker: ^0.8.7+4
 
 dev_dependencies:
   flutter_test:
