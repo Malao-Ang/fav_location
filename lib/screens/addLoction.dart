@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fav_location/models/location.dart';
 import 'package:fav_location/providers/users_location.dart';
 import 'package:fav_location/widgets/image_inout.dart';
 import 'package:fav_location/widgets/location_input.dart';
@@ -19,14 +20,17 @@ class AddLocation extends ConsumerStatefulWidget {
 class _AddLocationState extends ConsumerState<AddLocation> {
   final _titleController = TextEditingController();
   File? _selectedImage;
+  PlaceLocation? _selectedLocation;
   void _saveLocation() {
     final enterText = _titleController.text;
-    if (enterText.isEmpty || _selectedImage == null) {
+    if (enterText.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
       return;
     }
     ref
         .read(userLocationProvider.notifier)
-        .addPlace(enterText, _selectedImage!);
+        .addPlace(enterText, _selectedImage!, _selectedLocation!);
     Navigator.of(context).pop();
   }
 
@@ -53,7 +57,11 @@ class _AddLocationState extends ConsumerState<AddLocation> {
                 },
               ),
               Gap(16),
-              LocationInput(),
+              LocationInput(
+                onSelection: (location) {
+                  _selectedLocation = location;
+                },
+              ),
               Gap(16),
               ElevatedButton.icon(
                 onPressed: _saveLocation,

@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 class LocationList extends StatelessWidget {
   const LocationList({super.key, required this.locations});
-  final List<Location> locations;
+  final List<Place> locations;
   @override
   Widget build(BuildContext context) {
     if (locations.isEmpty) {
@@ -33,6 +33,9 @@ class LocationList extends StatelessWidget {
                     builder: (ctx) =>
                         LocationDetail(location: locations[index])));
               },
+              subtitle: Text(locations[index].location.address,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground)),
             ));
   }
 }

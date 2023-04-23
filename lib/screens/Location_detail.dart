@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 class LocationDetail extends StatelessWidget {
   const LocationDetail({super.key, required this.location});
-  final Location location;
+  final Place location;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
