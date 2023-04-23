@@ -11,4 +11,5 @@ class UserLocationNotifier extends StateNotifier<List<Location>> {
 }
 
 final userLocationProvider =
-    StateNotifierProvider((ref) => UserLocationNotifier());
+    StateNotifierProvider<UserLocationNotifier, List<Location>>(
+        (ref) => UserLocationNotifier());

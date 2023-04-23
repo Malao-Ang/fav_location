@@ -1,4 +1,5 @@
 import 'package:fav_location/models/location.dart';
+import 'package:fav_location/screens/Location_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -23,6 +24,11 @@ class LocationList extends StatelessWidget {
               title: Text(locations[index].title,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground)),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) =>
+                        LocationDetail(location: locations[index])));
+              },
             ));
   }
 }

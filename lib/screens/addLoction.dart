@@ -1,17 +1,28 @@
+import 'package:fav_location/providers/users_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-class AddLocation extends StatefulWidget {
+class AddLocation extends ConsumerStatefulWidget {
   const AddLocation({super.key});
 
   @override
-  State<AddLocation> createState() => _AddLocationState();
+  ConsumerState<AddLocation> createState() => _AddLocationState();
 }
 
-class _AddLocationState extends State<AddLocation> {
+class _AddLocationState extends ConsumerState<AddLocation> {
   final _titleController = TextEditingController();
+  void _saveLocation() {
+    final enterText = _titleController.text;
+    if (enterText.isEmpty) {
+      return;
+    }
+    ref.read(userLocationProvider.notifier).addPlace(enterText);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +41,7 @@ class _AddLocationState extends State<AddLocation> {
               ),
               Gap(16),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: _saveLocation,
                 label: Text("Add Place"),
                 icon: Icon(Icons.add),
               )
