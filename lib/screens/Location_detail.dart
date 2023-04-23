@@ -6,6 +6,13 @@ import 'package:flutter/src/widgets/placeholder.dart';
 class LocationDetail extends StatelessWidget {
   const LocationDetail({super.key, required this.location});
   final Place location;
+  String get locationImage {
+    print('_pickedLocation not null');
+    final lat = location.location.latitude;
+    final lng = location.location.longtitude;
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C$lat,$lng&key=AIzaSyDsukfbPM0B1Q4RMckP1Ffm8M0P2ZuH6Pg';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +27,32 @@ class LocationDetail extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
           ),
-          Text(
-            location.title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(color: Theme.of(context).colorScheme.onBackground),
-          ),
+          Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 70,
+                    backgroundImage: NetworkImage(locationImage),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Colors.transparent, Colors.black54],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter)),
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    child: Text(
+                      location.location.address,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground),
+                    ),
+                  )
+                ],
+              ))
         ]),
       ),
     );
