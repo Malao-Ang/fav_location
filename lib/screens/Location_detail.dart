@@ -1,4 +1,5 @@
 import 'package:fav_location/models/location.dart';
+import 'package:fav_location/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -33,9 +34,18 @@ class LocationDetail extends StatelessWidget {
               right: 0,
               child: Column(
                 children: [
-                  CircleAvatar(
-                    radius: 70,
-                    backgroundImage: NetworkImage(locationImage),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (cyx) => MapScreen(
+                                location: location.location,
+                                isSelecting: false,
+                              )));
+                    },
+                    child: CircleAvatar(
+                      radius: 70,
+                      backgroundImage: NetworkImage(locationImage),
+                    ),
                   ),
                   Container(
                     decoration: BoxDecoration(
